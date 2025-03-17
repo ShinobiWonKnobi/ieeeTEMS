@@ -1,0 +1,252 @@
+/* Prevent the Navbar from Shrinking Too Much */
+body {
+    min-width: 360px; /* Prevents extreme shrinking */
+    overflow-x: hidden; /* Stops horizontal scroll issues */
+}
+
+/* Navbar Background with Image */
+.navbar {
+    background: url('../assets/images/bg.png') no-repeat center center/cover;
+    background-color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 80px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Scrolled state for navbar */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.95);
+    height: 70px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Brand Section (Logo & Name) */
+.brand {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap; /* Prevents breaking */
+}
+
+.brand img {
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .brand img {
+    width: 70px;
+}
+
+.brandName {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap; /* Prevents text from cutting */
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .brandName {
+    font-size: 20px;
+}
+
+.brand-name {
+    display: block;
+}
+
+.fullForm {
+    font-size: 12px;
+    color: white;
+    display: block;
+    white-space: nowrap; /* Ensures it doesn't wrap weirdly */
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .fullForm {
+    font-size: 11px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    transition: 0.3s;
+    padding: 10px 15px; /* Prevents text cutoff */
+    display: inline-block;
+    white-space: nowrap; /* Ensures no cutoff */
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: #f4a261;
+}
+
+/* Active link styling */
+.nav-links a.active-link {
+    color: #f4a261;
+}
+
+.nav-links a.active-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background-color: #f4a261;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+}
+
+.hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: white;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.hamburger-icon span:nth-child(1) {
+    top: 0px;
+}
+
+.hamburger-icon span:nth-child(2) {
+    top: 8px;
+}
+
+.hamburger-icon span:nth-child(3) {
+    top: 16px;
+}
+
+.hamburger-icon.open span:nth-child(1) {
+    top: 8px;
+    transform: rotate(135deg);
+}
+
+.hamburger-icon.open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+
+.hamburger-icon.open span:nth-child(3) {
+    top: 8px;
+    transform: rotate(-135deg);
+}
+
+/* Responsive Design */
+@media (max-width: 1080px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-links a {
+        padding: 8px 12px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: 0.5s ease;
+        padding: 80px 0;
+        margin: 0;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-links a.active-link::after {
+        left: 50%;
+        right: auto;
+        width: 30px;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+    
+    .brand img {
+        width: 60px;
+    }
+    
+    .brandName {
+        font-size: 18px;
+    }
+    
+    .fullForm {
+        font-size: 10px;
+    }
+    
+    .nav-links {
+        width: 100%;
+    }
+}

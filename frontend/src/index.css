@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+*{
+    scroll-behavior: smooth;
+    /* background-color: aliceblue; */
+}

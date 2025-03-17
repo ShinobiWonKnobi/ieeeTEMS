@@ -1,0 +1,36 @@
+{
+  "name": "ieee_tems",
+  "version": "1.0.0",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js",
+    "frontend": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "install:all": "npm install && cd frontend && npm install",
+    "dev:all": "concurrently \"npm run dev\" \"npm run frontend\""
+  },
+  "type": "module",
+  "keywords": [
+    "ieee",
+    "tems",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "IEEE TEMS SRM",
+  "license": "MIT",
+  "description": "A modern web application for the IEEE Technology & Engineering Management Society (TEMS) chapter at SRM Institute of Science and Technology.",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.11.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.9"
+  }
+}
