@@ -5,7 +5,7 @@ const AppContext = createContext();
 
 // Context provider component
 export const AppProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [notifications, setNotifications] = useState([]);
 
   // Toggle theme between light and dark

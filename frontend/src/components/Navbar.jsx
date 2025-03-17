@@ -1,11 +1,23 @@
-import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { classNames } from "../utils/styles";
 import logo from '../assets/logos/tems.png';
+import { useApp } from "../context/AppContext";
+import './components.css';
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useApp();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navRef = useRef(null);
+  const menuRef = useRef(null);
+  const firstNavItemRef = useRef(null);
+  
+  // Close menu when location changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   // Handle scroll effect
   useEffect(() => {
@@ -20,132 +32,158 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Handle clicking outside to close menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target) && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+  
+  // Handle escape key to close menu
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [isOpen]);
+
+  // Focus management for accessibility
+  useEffect(() => {
+    if (isOpen && firstNavItemRef.current) {
+      // When menu opens, focus the first nav item
+      firstNavItemRef.current.focus();
+    }
+  }, [isOpen]);
 
   // Close mobile menu when clicking a link
   const closeMenu = () => {
     setIsOpen(false);
   };
 
+  // Toggle mobile menu
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <header className={classNames(
-      "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-      scrolled 
-        ? "bg-black bg-opacity-95 h-[70px] shadow-lg" 
-        : "bg-black h-[80px]"
-    )}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <header 
+      ref={navRef}
+      className={`navbar ${scrolled ? 'navbar-scrolled' : ''} ${theme === 'dark' ? 'bg-primary-600/95' : 'bg-light-100/95'}`}
+    >
+      <div className="navbar-container">
         {/* Brand/Logo */}
-        <div className="flex items-center">
-          <Link to="/" onClick={closeMenu} className="flex items-center">
+        <div className="navbar-brand">
+          <Link 
+            to="/" 
+            onClick={closeMenu} 
+            className="flex items-center" 
+            aria-label="IEEE TEMS Home"
+          >
             <img 
               src={logo} 
-              alt="IEEE TEMS Logo" 
-              className={classNames(
-                "transition-all duration-300",
-                scrolled ? "w-[70px]" : "w-[80px]"
-              )} 
+              alt="" 
+              aria-hidden="true"
+              className={`navbar-logo ${scrolled ? 'h-8' : 'h-10'}`}
             />
-            <div className="ml-2">
-              <span className={classNames(
-                "block font-bold text-white transition-all duration-300",
-                scrolled ? "text-xl" : "text-2xl"
-              )}>
+            <div className="ml-3">
+              <span className={`block font-heading ${scrolled ? 'text-xl' : 'text-2xl'} ${theme === 'dark' ? 'text-light-500' : 'text-dark-500'}`}>
                 IEEE TEMS
               </span>
-              <span className={classNames(
-                "block text-white transition-all duration-300",
-                scrolled ? "text-[11px]" : "text-xs"
-              )}>
+              <span className={`block ${scrolled ? 'text-[10px]' : 'text-xs'} ${theme === 'dark' ? 'text-light-400' : 'text-dark-400'}`}>
                 Technology & Engineering Management Society
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Hamburger Menu */}
-        <div 
-          className="lg:hidden cursor-pointer z-[1001]" 
-          onClick={() => setIsOpen(!isOpen)}
+        {/* Hamburger Menu Button */}
+        <button
+          type="button"
+          className="navbar-toggle"
+          onClick={toggleMenu}
+          aria-expanded={isOpen}
+          aria-controls="main-navigation"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
-          <div className="w-7 h-5 relative">
-            <span className={classNames(
-              "absolute h-[3px] w-full bg-white rounded-md transition-all duration-300",
-              isOpen ? "top-2 rotate-45" : "top-0"
-            )}></span>
-            <span className={classNames(
-              "absolute h-[3px] w-full bg-white rounded-md top-2 transition-all duration-300",
-              isOpen ? "opacity-0 left-[-60px]" : "opacity-100 left-0"
-            )}></span>
-            <span className={classNames(
-              "absolute h-[3px] w-full bg-white rounded-md transition-all duration-300",
-              isOpen ? "top-2 -rotate-45" : "top-4"
-            )}></span>
+          <div className="w-6 h-5 relative">
+            <span className={`absolute h-[2px] w-full rounded-md transition-all duration-300 ${theme === 'dark' ? 'bg-light-500' : 'bg-dark-500'} ${isOpen ? "top-2 rotate-45" : "top-0"}`}></span>
+            <span className={`absolute h-[2px] w-full rounded-md top-2 transition-all duration-300 ${theme === 'dark' ? 'bg-light-500' : 'bg-dark-500'} ${isOpen ? "opacity-0 left-[-60px]" : "opacity-100 left-0"}`}></span>
+            <span className={`absolute h-[2px] w-full rounded-md transition-all duration-300 ${theme === 'dark' ? 'bg-light-500' : 'bg-dark-500'} ${isOpen ? "top-2 -rotate-45" : "top-4"}`}></span>
           </div>
-        </div>
+        </button>
 
         {/* Navigation Links */}
-        <nav className={classNames(
-          "lg:flex items-center gap-8",
-          "transition-all duration-500",
-          isOpen 
-            ? "fixed top-0 right-0 w-[250px] h-screen bg-black bg-opacity-95 flex flex-col justify-center items-center gap-8 p-8" 
-            : "hidden lg:flex lg:items-center lg:static lg:h-auto lg:w-auto lg:bg-transparent lg:p-0",
-          isOpen ? "right-0" : "right-[-100%]"
-        )}>
-          <NavLink 
-            to="/" 
-            onClick={closeMenu} 
-            className={({ isActive }) => classNames(
-              "text-white hover:text-primary-300 transition-colors duration-300 py-2 px-3",
-              isActive ? "font-medium text-primary-300 relative after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-primary-300" : ""
-            )}
+        <nav
+          id="main-navigation"
+          ref={menuRef}
+          className={`navbar-menu ${isOpen ? 'navbar-mobile open' : ''}`}
+          aria-label="Main navigation"
+        >
+          {isOpen && (
+            <button 
+              className="sr-only focus:not-sr-only absolute top-4 left-4 bg-primary-600 text-light-500 px-3 py-2 rounded"
+              onClick={closeMenu}
+            >
+              Close menu
+            </button>
+          )}
+          
+          {navLinks.map((link, index) => (
+            <NavLink 
+              key={link.to}
+              to={link.to} 
+              onClick={closeMenu}
+              ref={index === 0 ? firstNavItemRef : null}
+              className={({ isActive }) => `navbar-link ${isActive ? 'navbar-link-active' : ''}`}
+            >
+              {link.label}
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 transition-transform duration-300 origin-left bg-accent-500 group-hover:scale-x-100`}></span>
+            </NavLink>
+          ))}
+          
+          {/* Theme Toggle Button */}
+          <button 
+            onClick={toggleTheme} 
+            className={`ml-2 p-2 rounded-full transition-all duration-300 focus-ring ${
+              theme === 'dark' 
+                ? 'bg-primary-700 text-light-500 hover:bg-primary-800' 
+                : 'bg-light-200 text-primary-500 hover:bg-light-300'
+            }`}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
           >
-            Home
-          </NavLink>
-          <NavLink 
-            to="/events" 
-            onClick={closeMenu} 
-            className={({ isActive }) => classNames(
-              "text-white hover:text-primary-300 transition-colors duration-300 py-2 px-3",
-              isActive ? "font-medium text-primary-300 relative after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-primary-300" : ""
+            {theme === 'light' ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+              </svg>
             )}
-          >
-            Events
-          </NavLink>
-          <NavLink 
-            to="/team" 
-            onClick={closeMenu} 
-            className={({ isActive }) => classNames(
-              "text-white hover:text-primary-300 transition-colors duration-300 py-2 px-3",
-              isActive ? "font-medium text-primary-300 relative after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-primary-300" : ""
-            )}
-          >
-            Our Team
-          </NavLink>
-          <NavLink 
-            to="/about" 
-            onClick={closeMenu} 
-            className={({ isActive }) => classNames(
-              "text-white hover:text-primary-300 transition-colors duration-300 py-2 px-3",
-              isActive ? "font-medium text-primary-300 relative after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-primary-300" : ""
-            )}
-          >
-            About Us
-          </NavLink>
-          <NavLink 
-            to="/contact" 
-            onClick={closeMenu} 
-            className={({ isActive }) => classNames(
-              "text-white hover:text-primary-300 transition-colors duration-300 py-2 px-3",
-              isActive ? "font-medium text-primary-300 relative after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-primary-300" : ""
-            )}
-          >
-            Contact
-          </NavLink>
+          </button>
         </nav>
       </div>
     </header>
   );
 };
+
+// Navigation links data
+const navLinks = [
+  { to: "/", label: "Home" },
+  { to: "/events", label: "Events" },
+  { to: "/team", label: "Our Team" },
+  { to: "/about", label: "About Us" },
+  { to: "/contact", label: "Contact" }
+];
 
 export default Navbar;

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS v4 Test</title>
+  <link rel="stylesheet" href="./src/index.css">
+  <style>
+    /* For preview only - ensures we can see the result without running the dev server */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background-color: #121212;
+      color: #EEEEEE;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="text-4xl font-heading mb-8">Tailwind CSS v4 Components Test</h1>
+    </header>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-heading mb-4">Button Components</h2>
+      <div class="flex flex-wrap gap-4">
+        <button class="btn btn-primary">Primary Button</button>
+        <button class="btn btn-secondary">Secondary Button</button>
+        <button class="btn btn-accent">Accent Button</button>
+        <button class="btn btn-dark">Dark Button</button>
+        <button class="btn btn-light">Light Button</button>
+        <button class="btn btn-gradient">Gradient Button</button>
+        <button class="btn btn-glass">Glass Button</button>
+        <button class="btn btn-text">Text Button</button>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-4">
+        <button class="btn btn-primary btn-xs">Extra Small</button>
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary btn-md">Medium</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+        <button class="btn btn-primary btn-xl">Extra Large</button>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-4">
+        <button class="btn btn-primary btn-with-glow">Glowing</button>
+        <button class="btn btn-primary btn-elevate">Elevate on Hover</button>
+        <button class="btn btn-primary btn-disabled">Disabled</button>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-heading mb-4">Card Components</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="text-xl">Default Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a standard card component with default styling.</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-primary">Action</button>
+          </div>
+        </div>
+
+        <div class="card card-dark">
+          <div class="card-header">
+            <h3 class="text-xl">Dark Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a dark card component variant.</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-accent">Action</button>
+          </div>
+        </div>
+
+        <div class="card card-light">
+          <div class="card-header">
+            <h3 class="text-xl">Light Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a light card component variant.</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-dark">Action</button>
+          </div>
+        </div>
+
+        <div class="card card-glass">
+          <div class="card-header">
+            <h3 class="text-xl">Glass Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a glass card with blur effect.</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-glass">Action</button>
+          </div>
+        </div>
+
+        <div class="card card-gradient">
+          <div class="card-header">
+            <h3 class="text-xl">Gradient Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a card with gradient background.</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-gradient">Action</button>
+          </div>
+        </div>
+
+        <div class="card card-interactive card-with-hover">
+          <div class="card-header">
+            <h3 class="text-xl">Interactive Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This card has interactive hover effects.</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-secondary">Action</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-heading mb-4">Animation Examples</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card animate-fade-in">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Fade In</h3>
+            <p>This element has a fade-in animation.</p>
+          </div>
+        </div>
+
+        <div class="card animate-slide-up delay-200">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Slide Up</h3>
+            <p>This element slides up with a delay.</p>
+          </div>
+        </div>
+
+        <div class="card animate-slide-down delay-400">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Slide Down</h3>
+            <p>This element slides down with a delay.</p>
+          </div>
+        </div>
+
+        <div class="card animate-slide-left delay-600">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Slide Left</h3>
+            <p>This element slides from the right.</p>
+          </div>
+        </div>
+
+        <div class="card animate-slide-right delay-800">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Slide Right</h3>
+            <p>This element slides from the left.</p>
+          </div>
+        </div>
+
+        <div class="card animate-scale delay-1000">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Scale</h3>
+            <p>This element scales in with a delay.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Pulse</h3>
+            <div class="w-12 h-12 bg-accent-500 rounded-full animate-pulse mx-auto"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body card-compact">
+            <h3 class="text-lg mb-2">Spin</h3>
+            <div class="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-heading mb-6">Custom Utilities Demo</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="text-xl mb-4 text-shadow">Text Shadow</h3>
+            <p class="text-shadow-sm">This text has a small shadow.</p>
+            <p class="text-shadow">This text has a medium shadow.</p>
+            <p class="text-shadow-lg">This text has a large shadow.</p>
+          </div>
+        </div>
+
+        <div class="card enhanced-card">
+          <div class="card-body">
+            <h3 class="text-xl mb-4">Enhanced Card Design</h3>
+            <p>This card uses enhanced styling from the components layer.</p>
+            <div class="mt-4">
+              <span class="gradient-border inline-block py-1">Gradient Border Effect</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html> 
