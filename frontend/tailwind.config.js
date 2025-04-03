@@ -139,7 +139,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Zen Dots', 'cursive'],
+        heading: ['Inter', 'sans-serif'],
         mono: ['Roboto Mono', 'Consolas', 'Monaco', 'monospace'],
       },
       fontSize: {

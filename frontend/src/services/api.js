@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance with default config
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -29,6 +29,8 @@ export const getImageById = async (id) => {
   }
 };
 
+// Function below this line to be removed
+/*
 export const uploadImage = async (name, imagePath) => {
   try {
     const response = await api.post('/upload', { name, image: imagePath });
@@ -38,5 +40,7 @@ export const uploadImage = async (name, imagePath) => {
     throw error;
   }
 };
+*/
+// Function above this line to be removed
 
 export default api; 

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getImages, getImageById, uploadImage } from '../services/api';
+import { getImages, getImageById } from '../services/api';
 
 export const useGetImages = (name) => {
   return useQuery({
@@ -17,6 +17,8 @@ export const useGetImageById = (id) => {
   });
 };
 
+// Hook below this line to be removed
+/*
 export const useUploadImage = () => {
   const queryClient = useQueryClient();
   
@@ -28,4 +30,6 @@ export const useUploadImage = () => {
       return data;
     },
   });
-}; 
+};
+*/
+// Hook above this line to be removed 

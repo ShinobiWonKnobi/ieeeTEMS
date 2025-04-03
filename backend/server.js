@@ -2,9 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
-import fs from "fs";
+// import fs from "fs";
 import Image from "./models/ImageModel.js";
-import path from "path";
+// import path from "path";
 import { connectDB } from "./config/db.js";
 
 // Load environment variables
@@ -31,39 +31,6 @@ const errorHandler = (err, req, res, next) => {
 };
 
 // API Routes
-// Upload Image by Path
-app.post("/upload", async (req, res, next) => {
-  try {
-    const { name, image } = req.body; // image contains the file path
-
-    if (!name || !image) {
-      return res.status(400).json({ error: "Name and image path are required" });
-    }
-
-    // Convert Windows path to cross-platform path
-    const imagePath = path.resolve(image);
-
-    if (!fs.existsSync(imagePath)) {
-      return res.status(400).json({ error: "Image file does not exist" });
-    }
-
-    // Read and convert to Base64
-    const imgData = fs.readFileSync(imagePath);
-    const base64Image = imgData.toString("base64");
-
-    // Save to MongoDB
-    const newImage = new Image({ name, image: base64Image });
-    await newImage.save();
-
-    res.status(201).json({ 
-      message: "Image uploaded successfully!", 
-      imageId: newImage._id 
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
 // Get images by name
 app.get('/images/name/:name', async (req, res, next) => {
   try {
@@ -115,7 +82,18 @@ app.use(errorHandler);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server started at http://localhost:${PORT}`);
-  connectDB();
-});
+
+const startServer = async () => {
+  try {
+    await connectDB(); // Connect to DB first
+    app.listen(PORT, () => {
+      console.log(`🚀 Server started at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    // connectDB already logs the error and exits, but we catch here just in case
+    console.error("Failed to start server:", error);
+    process.exit(1); // Ensure exit if connectDB somehow didn't
+  }
+};
+
+startServer(); // Call the async function to start the server
