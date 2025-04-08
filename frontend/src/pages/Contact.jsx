@@ -108,7 +108,7 @@ const Contact = () => {
             </div>
           </div>
           
-          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-dark-500">
+          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-dark-700">
             <h3 className="text-xl font-semibold text-dark-800 dark:text-light-200 mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               <a href="#" aria-label="Facebook" className="bg-primary-500 text-white p-3 rounded-full hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 transition">
@@ -136,7 +136,7 @@ const Contact = () => {
         </motion.div>
         
         <motion.div 
-          className="bg-white dark:bg-dark-600 p-8 rounded-lg shadow-md dark:shadow-lg border border-gray-200 dark:border-dark-500"
+          className="bg-white dark:bg-dark-800 p-8 rounded-lg shadow-md dark:shadow-lg border border-gray-200 dark:border-dark-700"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -168,7 +168,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-400 rounded-lg bg-gray-50 dark:bg-dark-500 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-700 rounded-lg bg-gray-50 dark:bg-dark-700 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
                   placeholder="John Doe"
                 />
               </div>
@@ -182,7 +182,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-400 rounded-lg bg-gray-50 dark:bg-dark-500 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-700 rounded-lg bg-gray-50 dark:bg-dark-700 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
                   placeholder="john@example.com"
                 />
               </div>
@@ -196,7 +196,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-400 rounded-lg bg-gray-50 dark:bg-dark-500 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-700 rounded-lg bg-gray-50 dark:bg-dark-700 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
                   placeholder="How can we help you?"
                 />
               </div>
@@ -210,7 +210,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows="5"
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-400 rounded-lg bg-gray-50 dark:bg-dark-500 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-700 rounded-lg bg-gray-50 dark:bg-dark-700 text-dark-800 dark:text-light-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-400 dark:focus:border-primary-400"
                   placeholder="Your message here..."
                 ></textarea>
               </div>
@@ -220,8 +220,8 @@ const Contact = () => {
                 disabled={isSubmitting}
                 className={`w-full py-3 px-6 rounded-lg text-white font-medium transition duration-300 ease-in-out ${
                   isSubmitting 
-                    ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed' 
-                    : 'bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-dark-600'
+                    ? 'bg-gray-400 dark:bg-dark-500 cursor-not-allowed' 
+                    : 'bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-dark-800'
                 }`}
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}

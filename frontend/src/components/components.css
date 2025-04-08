@@ -33,18 +33,18 @@
   }
 
   .btn-primary {
-    background-color: var(--color-secondary-500);
+    background-color: var(--color-primary-500);
     color: var(--color-light-500);
     box-shadow: var(--shadow-md);
   }
   
   .btn-primary:hover {
-    background-color: var(--color-secondary-600);
+    background-color: var(--color-primary-600);
   }
   
   .btn-primary:focus {
-    background-color: var(--color-secondary-600);
-    --tw-ring-color: var(--color-secondary-400);
+    background-color: var(--color-primary-600);
+    --tw-ring-color: var(--color-primary-400);
   }
 
   .btn-secondary {
@@ -63,18 +63,18 @@
   }
 
   .btn-dark {
-    background-color: var(--color-dark-500);
+    background-color: var(--color-dark-700);
     color: var(--color-light-500);
     box-shadow: var(--shadow-md);
   }
   
   .btn-dark:hover {
-    background-color: var(--color-dark-400);
+    background-color: var(--color-dark-600);
   }
   
   .btn-dark:focus {
-    background-color: var(--color-dark-400);
-    --tw-ring-color: var(--color-dark-300);
+    background-color: var(--color-dark-600);
+    --tw-ring-color: var(--color-dark-500);
   }
 
   .btn-light {
@@ -228,9 +228,9 @@
   }
 
   .card-dark {
-    background-color: rgba(var(--color-dark-500-rgb, 52, 58, 64), 0.95);
+    background-color: var(--color-dark-800);
     color: var(--color-light-500);
-    border-color: rgba(var(--color-dark-400-rgb, 95, 102, 111), 0.6);
+    border-color: rgba(var(--color-dark-700-rgb, 31, 35, 38), 0.8);
   }
 
   .card-light {

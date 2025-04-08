@@ -24,7 +24,7 @@ const MainLayout = () => {
   return (
     <div 
       className={`min-h-screen transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-dark-500 text-light-500' : 'bg-light-100 text-dark-500'
+        theme === 'dark' ? 'bg-dark-900 text-light-500' : 'bg-light-100 text-dark-500'
       } ${pageLoaded ? 'opacity-100' : 'opacity-0'}`}
     >
       {/* Skip to content link for accessibility */}
@@ -42,7 +42,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       
-      <footer className={`footer ${theme === 'dark' ? 'bg-primary-600' : 'bg-primary-500'}`}>
+      <footer className={`footer ${theme === 'dark' ? 'bg-dark-800' : 'bg-primary-500'}`}>
         {/* Footer decorative top border */}
         <div className="footer-decor"></div>
         
@@ -140,7 +140,7 @@ const MainLayout = () => {
                     id="newsletter-email"
                     type="email" 
                     placeholder="Your email" 
-                    className="bg-primary-700/50 text-light-500 py-2 px-4 rounded-l-md border-0 focus:ring-2 focus:ring-accent-500 focus:outline-none w-full"
+                    className="bg-dark-700/50 text-light-500 py-2 px-4 rounded-l-md border-0 focus:ring-2 focus:ring-accent-500 focus:outline-none w-full"
                     aria-required="true"
                   />
                   <button 
@@ -157,8 +157,8 @@ const MainLayout = () => {
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} IEEE TEMS. All rights reserved.</p>
             <div className="mt-4 sm:mt-0 text-sm">
-              <a href="/privacy" className="text-light-500/70 hover:text-accent-500 transition-colors duration-300 mr-4">Privacy Policy</a>
-              <a href="/terms" className="text-light-500/70 hover:text-accent-500 transition-colors duration-300">Terms of Service</a>
+              <a href="/privacy" className="text-light-600 hover:text-accent-500 transition-colors duration-300 mr-4">Privacy Policy</a>
+              <a href="/terms" className="text-light-600 hover:text-accent-500 transition-colors duration-300">Terms of Service</a>
             </div>
           </div>
         </div>

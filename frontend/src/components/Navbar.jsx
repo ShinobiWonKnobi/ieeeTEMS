@@ -78,7 +78,7 @@ const Navbar = () => {
   return (
     <header 
       ref={navRef}
-      className={`navbar ${scrolled ? 'navbar-scrolled' : ''} ${theme === 'dark' ? 'bg-primary-600/95' : 'bg-light-100/95'}`}
+      className={`navbar ${scrolled ? 'navbar-scrolled' : ''} ${theme === 'dark' ? 'bg-dark-800/95' : 'bg-light-100/95'}`}
     >
       <div className="navbar-container">
         {/* Brand/Logo */}
@@ -156,7 +156,7 @@ const Navbar = () => {
             onClick={toggleTheme} 
             className={`ml-2 p-2 rounded-full transition-all duration-300 focus-ring ${
               theme === 'dark' 
-                ? 'bg-primary-700 text-light-500 hover:bg-primary-800' 
+                ? 'bg-dark-700 text-light-500 hover:bg-dark-600' 
                 : 'bg-light-200 text-primary-500 hover:bg-light-300'
             }`}
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}

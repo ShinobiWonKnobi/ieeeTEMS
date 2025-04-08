@@ -129,7 +129,7 @@ const About = () => {
                 whileHover={{ y: -5, scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <Card className="h-full dark:bg-dark-600 border border-transparent dark:border-dark-500" elevation={2}>
+                <Card className="h-full dark:bg-dark-800 border border-transparent dark:border-dark-700" elevation={2}>
                   <div className="text-primary-500 dark:text-primary-400 mb-4">
                     <IconRenderer pathData={item.icon} className="w-10 h-10" />
                   </div>
@@ -172,10 +172,10 @@ const About = () => {
                 whileHover={{ y: -8, scale: 1.03, transition: { type: 'spring', stiffness: 300 } }}
                 className={`bg-gradient-to-br p-8 rounded-lg border backdrop-blur-sm transition-colors duration-300 
                   ${ value.color === 'primary' 
-                      ? 'from-primary-500/10 to-primary-600/10 border-primary-500/20 text-primary-700 dark:from-primary-600/10 dark:to-primary-700/10 dark:border-primary-500/30 dark:text-primary-300' 
+                      ? 'from-primary-500/10 to-primary-600/10 border-primary-500/20 text-primary-700 dark:from-primary-700/10 dark:to-primary-800/10 dark:border-primary-600/30 dark:text-primary-300' 
                       : value.color === 'secondary' 
-                        ? 'from-secondary-500/10 to-secondary-600/10 border-secondary-500/20 text-secondary-700 dark:from-secondary-600/10 dark:to-secondary-700/10 dark:border-secondary-500/30 dark:text-secondary-300' 
-                        : 'from-accent-500/10 to-accent-600/10 border-accent-500/20 text-accent-700 dark:from-accent-600/10 dark:to-accent-700/10 dark:border-accent-500/30 dark:text-accent-300'
+                        ? 'from-secondary-500/10 to-secondary-600/10 border-secondary-500/20 text-secondary-700 dark:from-secondary-700/10 dark:to-secondary-800/10 dark:border-secondary-600/30 dark:text-secondary-300' 
+                        : 'from-accent-500/10 to-accent-600/10 border-accent-500/20 text-accent-700 dark:from-accent-700/10 dark:to-accent-800/10 dark:border-accent-600/30 dark:text-accent-300'
                   }`}
               >
                 <div className={`mb-4 text-${value.color}-500 dark:text-${value.color}-400`}>
