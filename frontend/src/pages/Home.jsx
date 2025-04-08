@@ -4,6 +4,32 @@ import Hero from '../components/hero';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
+// Animation Variants for sections (optional but cleaner)
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
+
+// Animation Variants for staggered items (like cards)
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
 const Home = () => {
   const [loaded, setLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -67,28 +93,33 @@ const Home = () => {
       <Hero />
       
       {/* Feature Section */}
-      <section className="container-custom py-20">
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          animate={loaded ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-16 text-center max-w-3xl mx-auto"
-        >
+      <motion.section 
+        className="container-custom py-20"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="mb-16 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-heading mb-4">
             <span className="text-primary-500">Empowering</span> Engineering Leaders
           </h2>
           <p className="text-lg opacity-80 leading-relaxed">
             IEEE TEMS helps technology professionals develop the management skills needed to advance their careers and lead innovation.
           </p>
-        </motion.div>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ staggerChildren: 0.1 }}
+        >
+          {features.map((feature) => (
             <motion.div 
               key={feature.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={loaded ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+              variants={itemVariants}
             >
               <Card 
                 title={feature.title}
@@ -112,24 +143,30 @@ const Home = () => {
               </Card>
             </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
       
       {/* About Overview Section */}
-      <section className="py-20 relative overflow-hidden">
+      <motion.section 
+        className="py-20 relative overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="absolute inset-0 grid-bg opacity-10"></div>
         <div 
           className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-transparent"
-          style={{ transform: `translateY(${scrollYProgress.get() * 100}px)` }}
         ></div>
         
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              animate={loaded ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
               className="relative"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <div className="aspect-video bg-primary-600/20 rounded-lg overflow-hidden">
                 <div className="grid-bg absolute inset-0 opacity-20"></div>
@@ -146,8 +183,9 @@ const Home = () => {
             
             <motion.div 
               initial={{ opacity: 0, x: 50 }}
-              animate={loaded ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <h2 className="text-3xl md:text-4xl font-heading mb-6">
                 About IEEE <span className="text-primary-500">TEMS</span>
@@ -166,17 +204,26 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
       
       {/* Call to Action */}
-      <section className="py-20 bg-primary-500 text-light-500 relative overflow-hidden">
+      <motion.section 
+        className="py-20 bg-primary-500 text-light-500 relative overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="absolute inset-0 grid-bg opacity-10"></div>
         
-        <motion.div 
-          style={{ y: translateY }}
-          className="container-custom relative z-10"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="container-custom relative z-10">
+          <motion.div 
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
             <div>
               <h2 className="text-3xl md:text-4xl font-heading mb-6">
                 Join Our <span className="text-secondary-500">Community</span>
@@ -212,9 +259,9 @@ const Home = () => {
               </Card>
               <div className="absolute -bottom-4 -right-4 w-full h-full bg-accent-500/10 rounded-lg -z-10"></div>
             </div>
-          </div>
-        </motion.div>
-      </section>
+          </motion.div>
+        </div>
+      </motion.section>
     </div>
   );
 };

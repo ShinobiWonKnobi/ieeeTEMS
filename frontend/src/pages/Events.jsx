@@ -1,93 +1,43 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import { upcomingEvents, pastEvents } from '../data/eventsData.js';
+
+// Animation Variants (can be shared across pages or defined here)
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
 
 const Events = () => {
-  const [loaded, setLoaded] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const translateY = useTransform(scrollYProgress, [0, 0.5], [0, -50]);
-  
-  useEffect(() => {
-    setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-  }, []);
-  
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "Technical Leadership Workshop",
-      description: "Join us for an interactive workshop focused on developing leadership skills for technical professionals.",
-      date: "August 15, 2023",
-      time: "10:00 AM - 2:00 PM",
-      location: "Virtual Event",
-      category: "Workshop",
-      color: "primary"
-    },
-    {
-      id: 2,
-      title: "Innovation Summit 2023",
-      description: "A premier event bringing together thought leaders to discuss the future of technology and engineering management.",
-      date: "September 22, 2023",
-      time: "9:00 AM - 5:00 PM",
-      location: "Grand Convention Center, Chennai",
-      category: "Conference",
-      color: "secondary"
-    },
-    {
-      id: 3,
-      title: "Industry-Academia Networking",
-      description: "Connect with professionals from both industry and academia to foster collaboration and knowledge exchange.",
-      date: "October 10, 2023",
-      time: "6:00 PM - 9:00 PM",
-      location: "SRM Tech Park, Kattankulathur",
-      category: "Networking",
-      color: "accent"
-    }
-  ];
-  
-  const pastEvents = [
-    {
-      id: 4,
-      title: "AI in Engineering Management",
-      description: "An exploration of how artificial intelligence is transforming engineering management practices.",
-      date: "July 5, 2023",
-      category: "Webinar",
-      color: "primary"
-    },
-    {
-      id: 5,
-      title: "Student Leadership Program",
-      description: "A specialized program designed to develop leadership skills in engineering students.",
-      date: "June 18, 2023",
-      category: "Workshop",
-      color: "secondary"
-    },
-    {
-      id: 6,
-      title: "Research Symposium",
-      description: "Showcasing the latest research in technology and engineering management.",
-      date: "May 27, 2023",
-      category: "Symposium",
-      color: "accent"
-    }
-  ];
-
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16">
+      <motion.section 
+        className="relative pt-32 pb-16"
+        variants={sectionVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="absolute top-0 left-0 w-full h-full grid-bg opacity-10 -z-10"></div>
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-primary-500/10 to-transparent -z-10"></div>
         
         <div className="container-custom">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={loaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center"
-          >
+          <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-heading mb-6 relative">
               Our <span className="text-primary-500">Events</span>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500"></div>
@@ -96,18 +46,19 @@ const Events = () => {
               Join us for engaging events designed to enhance your knowledge, skills, and network in the field of 
               technology and engineering management.
             </p>
-          </motion.div>
+          </div>
         </div>
-      </section>
+      </motion.section>
       
       {/* Upcoming Events Section */}
       <section className="py-16">
         <div className="container-custom">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={loaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={sectionVariants}
           >
             <h2 className="text-3xl font-heading mb-2">Upcoming Events</h2>
             <div className="w-20 h-1 bg-primary-500 mb-6"></div>
@@ -116,29 +67,33 @@ const Events = () => {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {upcomingEvents.map((event, index) => (
+          <motion.div 
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.1 }}
+          >
+            {upcomingEvents.map((event) => (
               <motion.div 
                 key={event.id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={loaded ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + (index * 0.1) }}
+                variants={itemVariants}
+                whileHover={{ y: -5, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300 }}
               >
                 <Card 
-                  className="h-full relative overflow-hidden"
+                  className="h-full relative overflow-hidden dark:bg-dark-600 border border-transparent dark:border-dark-500"
                   elevation={3}
                 >
-                  <div className={`absolute top-0 left-0 w-full h-2 bg-${event.color}-500`}></div>
+                  <div className={`absolute top-0 left-0 w-full h-2 bg-${event.color}-500 dark:bg-${event.color}-400`}></div>
                   <div className="mb-4">
-                    <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full bg-${event.color}-500/10 text-${event.color}-500`}>
+                    <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full bg-${event.color}-500/10 text-${event.color}-600 dark:bg-${event.color}-400/10 dark:text-${event.color}-300`}>
                       {event.category}
                     </span>
                   </div>
-                  
-                  <h3 className="text-xl font-medium mb-3">{event.title}</h3>
-                  <p className="opacity-70 mb-6">{event.description}</p>
-                  
-                  <div className="flex flex-col space-y-3 mb-6">
+                  <h3 className="text-xl font-medium mb-3 text-dark-800 dark:text-light-200">{event.title}</h3>
+                  <p className="opacity-70 dark:opacity-80 mb-6 text-secondary-700 dark:text-light-400">{event.description}</p>
+                  <div className="flex flex-col space-y-3 mb-6 text-sm text-secondary-700 dark:text-light-400">
                     <div className="flex items-center text-sm">
                       <svg className="w-4 h-4 mr-2 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -161,7 +116,6 @@ const Events = () => {
                       <span>{event.location}</span>
                     </div>
                   </div>
-                  
                   <div className="mt-auto">
                     <Button
                       variant={event.color}
@@ -174,18 +128,19 @@ const Events = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
       
       {/* Calendar CTA Section */}
-      <section className="py-16 bg-primary-500 text-light-500 relative overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-10"></div>
-        
-        <motion.div 
-          style={{ y: translateY }}
-          className="container-custom relative z-10"
-        >
+      <motion.section 
+        className="py-16 bg-primary-500 text-light-500 relative overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
+        <div className="container-custom relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
               <h2 className="text-3xl font-heading mb-4">Stay Updated with Our Events</h2>
@@ -200,42 +155,47 @@ const Events = () => {
               </Button>
             </div>
           </div>
-        </motion.div>
-      </section>
+        </div>
+      </motion.section>
       
       {/* Past Events Section */}
-      <section className="py-16 bg-gradient-to-b from-transparent to-primary-500/5">
+      <section className="py-16 bg-gradient-to-b from-transparent to-primary-500/5 dark:to-primary-800/10">
         <div className="container-custom">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={loaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mb-10"
-          >
+             className="mb-10"
+             initial="hidden"
+             whileInView="visible"
+             viewport={{ once: true, amount: 0.2 }}
+             variants={sectionVariants}
+           >
             <h2 className="text-3xl font-heading mb-2">Past Events</h2>
             <div className="w-20 h-1 bg-secondary-500 mb-6"></div>
             <p className="text-lg opacity-80 max-w-3xl">
               Browse through our past events to see what you've missed and get a glimpse of what to expect at future events.
             </p>
-          </motion.div>
+           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pastEvents.map((event, index) => (
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.1 }}
+          >
+            {pastEvents.map((event) => (
               <motion.div 
                 key={event.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={loaded ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
-                className={`relative border border-${event.color}-500/20 rounded-md p-6 bg-${event.color}-500/5`}
+                variants={itemVariants}
+                className={`relative border border-${event.color}-500/20 dark:border-${event.color}-400/30 rounded-md p-6 bg-${event.color}-500/5 dark:bg-${event.color}-500/10`}
               >
                 <div className="mb-3">
-                  <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full bg-${event.color}-500/10 text-${event.color}-500`}>
+                  <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full bg-${event.color}-500/10 text-${event.color}-600 dark:bg-${event.color}-400/10 dark:text-${event.color}-300`}>
                     {event.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-medium mb-2">{event.title}</h3>
-                <p className="opacity-70 mb-4 text-sm">{event.description}</p>
-                <div className="flex items-center text-sm opacity-60">
+                <h3 className="text-xl font-medium mb-2 text-dark-700 dark:text-light-300">{event.title}</h3>
+                <p className="opacity-70 dark:opacity-80 mb-4 text-sm text-secondary-700 dark:text-light-400">{event.description}</p>
+                <div className="flex items-center text-sm opacity-60 dark:opacity-70 text-secondary-600 dark:text-light-500">
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                   </svg>
@@ -243,13 +203,19 @@ const Events = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
           
-          <div className="text-center mt-12">
-            <Button variant="outline" className="border-primary-500 text-primary-500 hover:bg-primary-500/10">
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Button variant="outline" className="border-primary-500 text-primary-500 hover:bg-primary-500/10 dark:border-primary-400 dark:text-primary-300 dark:hover:bg-primary-400/10">
               View All Past Events →
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
