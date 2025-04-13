@@ -14,33 +14,11 @@ export const teamMembers = [
     github: null,
   },
   {
-    id: 2,
-    name: 'Adhavan',
-    role: 'Technical Lead', // Assumed from "Technical"
-    image: '/team/Adhavan-Technical.jpg',
-    bio: 'Oversees technical projects and activities.', // Replace with actual bio
-    twitter: null,
-    linkedin: null,
-    website: null,
-    github: null,
-  },
-  {
-    id: 3,
-    name: 'Amaeya',
-    role: 'Public Relations', // Assumed from "PR"
-    image: '/team/Amaeya-PR.jpg',
-    bio: 'Manages communication and outreach for the chapter.', // Replace with actual bio
-    twitter: null,
-    linkedin: null,
-    website: null,
-    github: null,
-  },
-  {
-    id: 4,
-    name: 'Aryan',
-    role: 'Sponsorship Lead', // Assumed from "Sponsership"
-    image: '/team/Aryan-Sponsership.jpg',
-    bio: 'Secures funding and partnerships for the chapter.', // Replace with actual bio
+    id: 8,
+    name: 'Keshava',
+    role: 'Vice Chairman',
+    image: '/team/Keshava-ViceChairman.jpg',
+    bio: 'Supports the Chairman and assists in leading the chapter.', // Replace with actual bio
     twitter: null,
     linkedin: null,
     website: null,
@@ -58,11 +36,22 @@ export const teamMembers = [
     github: null,
   },
   {
-    id: 6,
-    name: 'Didithi',
-    role: 'Industry Connect Lead', // Assumed from "IndustryConnect"
-    image: '/team/Didithi-IndustryConnect.jpg',
-    bio: 'Builds relationships between the chapter and industry professionals.', // Replace with actual bio
+    id: 10,
+    name: 'Prakhar',
+    role: 'Treasurer', // Assumed from "Treasury"
+    image: '/team/Prakhar-Treasury.jpg',
+    bio: 'Manages the chapter\'s finances and budget.', // Replace with actual bio
+    twitter: null,
+    linkedin: null,
+    website: null,
+    github: null,
+  },
+  {
+    id: 2,
+    name: 'Adhavan',
+    role: 'Technical Lead', // Assumed from "Technical"
+    image: '/team/Adhavan-Technical.jpg',
+    bio: 'Oversees technical projects and activities.', // Replace with actual bio
     twitter: null,
     linkedin: null,
     website: null,
@@ -80,33 +69,11 @@ export const teamMembers = [
     github: null,
   },
   {
-    id: 8,
-    name: 'Keshava',
-    role: 'Vice Chairman',
-    image: '/team/Keshava-ViceChairman.jpg',
-    bio: 'Supports the Chairman and assists in leading the chapter.', // Replace with actual bio
-    twitter: null,
-    linkedin: null,
-    website: null,
-    github: null,
-  },
-  {
-    id: 9,
-    name: 'M. Prasanth', // Handled name format
-    role: 'Social Media Lead', // Assumed from "SocialMedia"
-    image: '/team/M.Prasanth-SocialMedia.jpg',
-    bio: 'Manages the chapter\'s online presence and social channels.', // Replace with actual bio
-    twitter: null,
-    linkedin: null,
-    website: null,
-    github: null,
-  },
-  {
-    id: 10,
-    name: 'Prakhar',
-    role: 'Treasurer', // Assumed from "Treasury"
-    image: '/team/Prakhar-Treasury.jpg',
-    bio: 'Manages the chapter\'s finances and budget.', // Replace with actual bio
+    id: 12,
+    name: 'Shrinesh',
+    role: 'Event Management Lead', // Assumed from "EventManagement"
+    image: '/team/Shrinesh-EventManagement.jpg',
+    bio: 'Plans and executes chapter events and workshops.', // Replace with actual bio
     twitter: null,
     linkedin: null,
     website: null,
@@ -124,11 +91,44 @@ export const teamMembers = [
     github: null,
   },
   {
-    id: 12,
-    name: 'Shrinesh',
-    role: 'Event Management Lead', // Assumed from "EventManagement"
-    image: '/team/Shrinesh-EventManagement.jpg',
-    bio: 'Plans and executes chapter events and workshops.', // Replace with actual bio
+    id: 4,
+    name: 'Aryan',
+    role: 'Sponsorship Lead', // Assumed from "Sponsership"
+    image: '/team/Aryan-Sponsership.jpg',
+    bio: 'Secures funding and partnerships for the chapter.', // Replace with actual bio
+    twitter: null,
+    linkedin: null,
+    website: null,
+    github: null,
+  },
+  {
+    id: 3,
+    name: 'Amaeya',
+    role: 'Public Relations', // Assumed from "PR"
+    image: '/team/Amaeya-PR.jpg',
+    bio: 'Manages communication and outreach for the chapter.', // Replace with actual bio
+    twitter: null,
+    linkedin: null,
+    website: null,
+    github: null,
+  },
+  {
+    id: 9,
+    name: 'M. Prasanth', // Handled name format
+    role: 'Social Media Lead', // Assumed from "SocialMedia"
+    image: '/team/M.Prasanth-SocialMedia.jpg',
+    bio: 'Manages the chapter\'s online presence and social channels.', // Replace with actual bio
+    twitter: null,
+    linkedin: null,
+    website: null,
+    github: null,
+  },
+  {
+    id: 6,
+    name: 'Didithi',
+    role: 'Industry Connect Lead', // Assumed from "IndustryConnect"
+    image: '/team/Didithi-IndustryConnect.jpg',
+    bio: 'Builds relationships between the chapter and industry professionals.', // Replace with actual bio
     twitter: null,
     linkedin: null,
     website: null,
