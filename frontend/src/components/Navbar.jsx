@@ -78,10 +78,7 @@ const Navbar = () => {
   // Handle link click - close menu and scroll to top
   const handleLinkClick = () => {
     closeMenu();
-    // Check if window is defined (for SSR compatibility)
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo(0, 0);
   };
 
   return (

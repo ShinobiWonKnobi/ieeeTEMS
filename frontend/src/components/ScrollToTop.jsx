@@ -8,15 +8,7 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Ensure window exists (for SSR compatibility)
-    if (typeof window !== 'undefined') {
-      // Scroll to top of the page on route change
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth' // Add smooth scrolling
-      });
-    }
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null; // This component doesn't render anything
