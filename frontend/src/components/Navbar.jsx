@@ -75,6 +75,15 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  // Handle link click - close menu and scroll to top
+  const handleLinkClick = () => {
+    closeMenu();
+    // Check if window is defined (for SSR compatibility)
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <header 
       ref={navRef}
@@ -85,7 +94,7 @@ const Navbar = () => {
         <div className="navbar-brand">
           <Link 
             to="/" 
-            onClick={closeMenu} 
+            onClick={handleLinkClick} 
             className="flex items-center" 
             aria-label="IEEE TEMS Home"
           >
@@ -142,7 +151,7 @@ const Navbar = () => {
             <NavLink 
               key={link.to}
               to={link.to} 
-              onClick={closeMenu}
+              onClick={handleLinkClick}
               ref={index === 0 ? firstNavItemRef : null}
               className={({ isActive }) => `navbar-link ${isActive ? 'navbar-link-active' : ''}`}
             >

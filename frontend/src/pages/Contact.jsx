@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useSubmitContactForm } from '../hooks/useApi';
 
 // Animation Variants
 const sectionVariants = {
@@ -19,10 +20,12 @@ const Contact = () => {
     message: '',
   });
   
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
-  const [submitStatus, setSubmitStatus] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState('');
   
+  const { mutate: submitContactForm, isLoading, isError, error } = useSubmitContactForm();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -31,22 +34,22 @@ const Contact = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setSubmitMessage('Thank you for your message! We will get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-    }, 1500);
+    submitContactForm(formData, {
+      onSuccess: () => {
+        setSubmitted(true);
+        setMessage('Thank you for your message! We will get back to you soon.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setSubmitting(false);
+      },
+      onError: (err) => {
+        setMessage(`Error submitting form: ${err.message || 'Please try again later'}`);
+        setSubmitting(false);
+      }
+    });
   };
   
   return (
@@ -141,17 +144,17 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          {submitStatus === 'success' ? (
+          {submitted ? (
             <motion.div 
               className="text-center py-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
               <div className="bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200 p-4 rounded-lg mb-6 border border-green-300 dark:border-green-700">
-                {submitMessage}
+                {message}
               </div>
               <button 
-                onClick={() => setSubmitStatus('')}
+                onClick={() => setSubmitted(false)}
                 className="bg-primary-500 text-white px-6 py-3 rounded-lg hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 transition"
               >
                 Send Another Message
@@ -217,14 +220,14 @@ const Contact = () => {
               
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={submitting}
                 className={`w-full py-3 px-6 rounded-lg text-white font-medium transition duration-300 ease-in-out ${
-                  isSubmitting 
+                  submitting 
                     ? 'bg-gray-400 dark:bg-dark-500 cursor-not-allowed' 
                     : 'bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-dark-800'
                 }`}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {submitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           )}

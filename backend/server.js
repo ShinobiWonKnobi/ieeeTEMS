@@ -1,11 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import cors from "cors";
-// import fs from "fs";
-import Image from "./models/ImageModel.js";
-// import path from "path";
-import { connectDB } from "./config/db.js";
+import supabase from "./config/supabaseClient.js";
 
 // Load environment variables
 dotenv.config();
@@ -34,19 +30,21 @@ const errorHandler = (err, req, res, next) => {
 // Get images by name
 app.get('/images/name/:name', async (req, res, next) => {
   try {
-    const images = await Image.find({ name: req.params.name });
+    const { data, error } = await supabase
+      .from('images')
+      .select('id, image')
+      .eq('name', req.params.name);
 
-    if (!images.length) {
+    if (error) throw error;
+
+    if (!data || !data.length) {
       return res.status(404).json({ error: "No images found for this name" });
     }
 
     res.json({ 
       name: req.params.name, 
-      count: images.length,
-      images: images.map(img => ({
-        id: img._id,
-        image: img.image
-      }))
+      count: data.length,
+      images: data
     });
   } catch (error) {
     next(error);
@@ -56,19 +54,181 @@ app.get('/images/name/:name', async (req, res, next) => {
 // Retrieve Image by ID
 app.get("/images/:id", async (req, res, next) => {
   try {
-    const image = await Image.findById(req.params.id);
+    const { data, error } = await supabase
+      .from('images')
+      .select('id, name, image')
+      .eq('id', req.params.id)
+      .single();
+
+    if (error) {
+      // Handle potential 'PGRST116' error if no row is found with single()
+      if (error.code === 'PGRST116') {
+        return res.status(404).json({ error: "Image not found" });
+      }
+      throw error;
+    }
     
-    if (!image) {
+    if (!data) {
       return res.status(404).json({ error: "Image not found" });
     }
     
-    res.json({
-      id: image._id,
-      name: image.name,
-      image: image.image
-    });
+    res.json(data);
+
   } catch (error) {
     next(error);
+  }
+});
+
+// Team Members endpoints
+app.get('/team_members', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('team_members')
+      .select('*');
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/team_members', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('team_members')
+      .insert([req.body]);
+    if (error) throw error;
+    res.status(201).json(data[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/team_members/:id', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('team_members')
+      .update(req.body)
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json(data[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/team_members/:id', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('team_members')
+      .delete()
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ message: 'Team member deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Events endpoints
+app.get('/events', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('events')
+      .select('*');
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/events', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('events')
+      .insert([req.body]);
+    if (error) throw error;
+    res.status(201).json(data[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/events/:id', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('events')
+      .update(req.body)
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json(data[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/events/:id', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('events')
+      .delete()
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ message: 'Event deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Contact Submissions endpoints
+app.get('/contact_submissions', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('contact_submissions')
+      .select('*');
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/contact_submissions', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('contact_submissions')
+      .insert([req.body]);
+    if (error) throw error;
+    res.status(201).json(data[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/contact_submissions/:id', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('contact_submissions')
+      .update(req.body)
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json(data[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/contact_submissions/:id', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('contact_submissions')
+      .delete()
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ message: 'Contact submission deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -85,15 +245,14 @@ const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    await connectDB(); // Connect to DB first
     app.listen(PORT, () => {
       console.log(`🚀 Server started at http://localhost:${PORT}`);
+      console.log('Supabase client initialized.');
     });
   } catch (error) {
-    // connectDB already logs the error and exits, but we catch here just in case
     console.error("Failed to start server:", error);
-    process.exit(1); // Ensure exit if connectDB somehow didn't
+    process.exit(1);
   }
 };
 
-startServer(); // Call the async function to start the server
+startServer();

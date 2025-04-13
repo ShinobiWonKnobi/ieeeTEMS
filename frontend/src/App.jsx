@@ -6,6 +6,7 @@ import Events from './pages/Events';
 import Team from './pages/Team';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 // Create a client
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />

@@ -1,150 +1,118 @@
 # IEEE TEMS Website
 
-<div align="center">
-  
-  [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-  [![Issues](https://img.shields.io/github/issues/ShinobiWonKnobi/IEEE_TEMS)](https://github.com/ShinobiWonKnobi/IEEE_TEMS/issues)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/ShinobiWonKnobi/IEEE_TEMS/pulls)
-  
-</div>
+A modern, responsive website for the IEEE Technology and Engineering Management Society (TEMS).
 
-A modern, responsive web application built for the IEEE Technology & Engineering Management Society (TEMS) chapter at SRM Institute of Science and Technology. This project serves as the official web presence for the TEMS chapter, showcasing events, team members, and chapter activities.
+## Features
 
-## 📸 Screenshots
+- Responsive design built with React and Tailwind CSS
+- Smooth animations with Framer Motion
+- Dark mode support
+- Backend API built with Express.js
+- Supabase integration for database storage
 
-<div align="center">
-  <i>Coming soon</i>
-</div>
-
-## ✨ Features
-
-- **Responsive Design** - Optimized for desktop, tablet, and mobile devices
-- **Modern UI** - Clean interface with smooth animations powered by Framer Motion
-- **Event Management** - Display and filter upcoming and past events
-- **Team Showcase** - Highlight chapter officers and members
-- **Contact Form** - Get in touch with form validation
-- **Dynamic Content** - Fetch and update content through the backend API
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
-- **React 19** - Built with the latest React version
-- **Vite** - Lightning-fast build tooling
-- **React Router** - Client-side routing
-- **TanStack Query** - Data fetching and state management
-- **Framer Motion** - Animations and transitions
-- **Tailwind CSS** - Utility-first styling approach
+- **React** - UI library
+- **Framer Motion** - Animation library
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Query** - Data fetching and caching
 - **Axios** - HTTP client
 
 ### Backend
-- **Node.js** - JavaScript runtime
-- **Express** - Web framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB object modeling
-- **Multer** - File upload handling
-- **CORS** - Cross-origin resource sharing
+- **Express.js** - Web framework
+- **Supabase** - Database platform 
 
-## 🚀 Quick Start
+## Project Structure
+
+```
+/
+├── backend/             # Backend API with Express
+│   ├── config/          # Configuration files
+│   └── server.js        # Main server file
+├── frontend/            # React frontend
+│   ├── public/          # Static assets
+│   └── src/             # Source code
+│       ├── components/  # Reusable UI components
+│       ├── hooks/       # Custom React hooks
+│       ├── pages/       # Page components
+│       └── services/    # API services
+└── supabase_schema.sql  # Supabase schema definition
+```
+
+## Getting Started
 
 ### Prerequisites
 
-- Node.js v16+ 
+- Node.js (v14 or higher)
 - npm or yarn
-- MongoDB (local or Atlas)
+- Supabase account
 
-### Local Development Setup
+### Installation
 
-1. **Clone the repository**
+1. Clone the repository
    ```bash
-   git clone https://github.com/ShinobiWonKnobi/IEEE_TEMS.git
-   cd IEEE_TEMS
+   git clone [repository-url]
+   cd ieee-tems-website
    ```
 
-2. **Set up environment variables**
-   Create a `.env` file in the root directory:
-   ```
-   MONGO_URI=your_mongodb_connection_string
-   PORT=5000
-   NODE_ENV=development
-   FRONTEND_URL=http://localhost:5173
-   ```
-
-3. **Install dependencies**
+2. Install dependencies
    ```bash
    # Install backend dependencies
+   cd backend
    npm install
-   
+
    # Install frontend dependencies
-   cd frontend && npm install
+   cd ../frontend
+   npm install
    ```
 
-4. **Start development servers**
+3. Create a `.env` file in the backend directory
+
+   ```
+   PORT=5000
+   FRONTEND_URL=http://localhost:5173
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. Set up the Supabase database
+   - Create a new project on [supabase.com](https://supabase.com)
+   - Run the SQL queries in `supabase_schema.sql` in the SQL Editor
+
+### Running the Application
+
+1. Start the backend server
    ```bash
-   # Start both backend and frontend concurrently
-   npm run dev:all
-   
-   # Or start them separately:
-   # Terminal 1 - Backend
+   cd backend
    npm run dev
-   
-   # Terminal 2 - Frontend
-   cd frontend && npm run dev
    ```
 
-5. **Open your browser**
-   Navigate to [http://localhost:5173](http://localhost:5173)
+2. Start the frontend development server
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
-## 📁 Project Structure
+3. Access the application at http://localhost:5173
 
-```
-├── backend/                # Backend server code
-│   ├── config/             # Configuration files
-│   ├── models/             # Database models
-│   └── server.js           # Express server
-│
-└── frontend/               # Frontend React application
-    ├── public/             # Static files
-    └── src/                # Source code
-        ├── assets/         # Images, fonts, etc.
-        ├── components/     # Reusable components
-        ├── context/        # React context providers
-        ├── hooks/          # Custom React hooks
-        ├── layouts/        # Layout components
-        ├── pages/          # Page components
-        ├── services/       # API services
-        └── utils/          # Utility functions
-```
+## API Endpoints
 
-## 🔄 Workflow
+See [SUPABASE_MIGRATION.md](./SUPABASE_MIGRATION.md) for a full list of available API endpoints.
 
-The project follows a feature-branch workflow:
+## Contributing
 
-1. Create a branch for your feature: `git checkout -b feature/your-feature`
-2. Make your changes and commit: `git commit -m "Add feature XYZ"`
-3. Push your branch: `git push origin feature/your-feature`
-4. Open a Pull Request on GitHub
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 🧪 UI Guidelines
+## License
 
-The project has established UI guidelines to maintain consistency. Please refer to `frontend/UI-GUIDELINES.md` for details on:
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-- Color palette
-- Typography
-- Component styling
-- Best practices
+## Acknowledgements
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Contributors
-
-<a href="https://github.com/ShinobiWonKnobi/IEEE_TEMS/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ShinobiWonKnobi/IEEE_TEMS" />
-</a>
-
-## 🙏 Acknowledgements
-
-- IEEE TEMS for their support and guidance
-- SRM Institute of Science and Technology
-- All contributing developers 
+- IEEE TEMS for inspiration
+- All the contributors who have helped with this project 
