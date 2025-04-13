@@ -36,7 +36,12 @@
     font-family: 'Zen Dots', cursive;
     letter-spacing: -0.02em;
     line-height: 1.2;
-    @apply text-light-100 dark:text-light-100 light:text-dark-900;
+    @apply text-light-100;
+  }
+  
+  /* Light mode heading styles */
+  .light h1, .light h2, .light h3, .light h4, .light h5, .light h6 {
+    @apply text-dark-900;
   }
   
   h1 {
@@ -209,8 +214,11 @@
   .circuit-card {
     position: relative;
     overflow: hidden;
-    @apply bg-dark-800 dark:bg-dark-800 light:bg-light-200 text-light-300 dark:text-light-300 light:text-dark-800 
-           shadow-md dark:shadow-md light:shadow-md transition-all duration-300;
+    @apply bg-dark-800 text-light-300 shadow-md transition-all duration-300;
+  }
+
+  .light .circuit-card {
+    @apply bg-light-200 text-dark-800;
   }
 
   .circuit-card:hover {
